@@ -1,0 +1,24 @@
+server:
+  port: 4002
+  servlet:
+    context-path: /api/provider
+spring:
+  application:
+    name: spring-cloud-department-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+      config:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        file-extension: yaml
+
+
+nacos:
+  provider:
+    key: key
+    value: value
