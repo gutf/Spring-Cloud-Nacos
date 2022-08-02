@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /api/consumer
 spring:
+  profiles:
+    active: dev
   application:
     name: spring-cloud-user-consumer
   cloud:
@@ -16,11 +18,12 @@ spring:
         username: nacos
         password: nacos
         file-extension: yaml
-
+        namespace: 3a43497c-68c1-4859-8170-82e01b0a250a
+        group: TEST_GROUP
 feign:
   circuitbreaker:
     enabled: true
-  #熔断器超时不能卸载feign：下面，另起
+#熔断器超时不能卸载feign：下面，另起
 hystrix:
   dashboard:
     proxy-stream-allow-list: 127.0.0.1
@@ -45,9 +48,3 @@ client:
   application:
     name:
       department: ${DEPARTMENT_APPLICATION_NAME:spring-cloud-department-provider}
-
-
-nacos:
-  consumer:
-    key: key
-    value: value

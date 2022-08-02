@@ -28,11 +28,15 @@ public class DepartmentController {
     @Value("${nacos.provider.value}")
     private String value;
 
+    @Value("${server.port}")
+    private String port;
+
     @GetMapping
     public String getDepartment(HttpServletRequest request){
         String authorization = request.getHeader("authorization");
         log.error("authorization is {}", authorization);
         log.error("key is {},value is {}",key,value);
-        return "department-01-" + authorization + "key is " + key + "value is " + value;
+        return new StringBuilder("department-").append(port).append("-").append(authorization).append(" key is ").append(key)
+                .append(" value is ").append(value).toString();
     }
 }

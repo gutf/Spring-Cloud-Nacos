@@ -31,13 +31,16 @@ public class UserController {
     @Value("${nacos.consumer.value}")
     private String value;
 
+    @Value("${server.port}")
+    private String port;
+
     private final DepartmentFeignClient departmentFeignClient;
 
     @GetMapping
     public String getUser(HttpServletRequest request){
-        log.error("user-01");
+        log.error(port);
         String department = departmentFeignClient.getDepartment();
         log.error("key is {},value is {}",key,value);
-        return "user-01:" + department;
+        return new StringBuilder("user-").append(port).append("-").append(department).toString();
     }
 }

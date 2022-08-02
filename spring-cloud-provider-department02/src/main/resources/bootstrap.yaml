@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /api/provider
 spring:
+  profiles:
+    active: prod
   application:
     name: spring-cloud-department-provider
   cloud:
@@ -16,9 +18,5 @@ spring:
         username: nacos
         password: nacos
         file-extension: yaml
-
-
-nacos:
-  provider:
-    key: key
-    value: value
+        group: TSET_GROUP
+        namespace: 10fbced2-b28a-46fd-bbf0-f34c2637331a
