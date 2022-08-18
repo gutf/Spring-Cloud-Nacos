@@ -18,8 +18,7 @@ spring:
         username: nacos
         password: nacos
         file-extension: yaml
-        namespace: 3a43497c-68c1-4859-8170-82e01b0a250a
-        group: TEST_GROUP
+
 feign:
   circuitbreaker:
     enabled: true
@@ -38,11 +37,6 @@ hystrix:
           strategy: SEMAPHORE
           thread:
             timeoutInMilliseconds: 2000
-
-# ribbon超时时间配置 （如果不配置的话默认是1000毫秒超时）
-#ribbon:
-#  ReadTimeout: 10000
-#  ConnectTimeout: 10000
 
 client:
   application:

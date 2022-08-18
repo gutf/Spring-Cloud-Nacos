@@ -1,9 +1,13 @@
 package com.gtf.cloud.consumer.client;
 
+import com.gtf.cloud.common.vo.DeptUpdateQo;
 import com.gtf.cloud.consumer.client.hystrix.DepartmentHystrix;
 import com.gtf.cloud.consumer.config.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 部门Feign请求
@@ -25,5 +29,8 @@ public interface DepartmentFeignClient {
      * @return java.lang.String
      */
     @GetMapping("/api/provider/v1/department")
-    String getDepartment();
+    String getDepartment(@RequestParam("deptId") Long deptId);
+
+    @PatchMapping("/api/provider/v1/department")
+    void updateDept(@RequestBody DeptUpdateQo deptUpdateQo);
 }

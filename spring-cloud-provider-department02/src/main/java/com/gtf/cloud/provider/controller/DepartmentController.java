@@ -1,11 +1,13 @@
 package com.gtf.cloud.provider.controller;
 
+import com.gtf.cloud.common.vo.DeptUpdateQo;
+import com.gtf.cloud.provider.po.Dept;
+import com.gtf.cloud.provider.service.DeptService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/v1/department")
 @RefreshScope
+@RequiredArgsConstructor
 public class DepartmentController {
 
     @Value("${nacos.provider.key}")
@@ -31,12 +34,17 @@ public class DepartmentController {
     @Value("${server.port}")
     private String port;
 
+    private final DeptService deptService;
+
     @GetMapping
-    public String getDepartment(HttpServletRequest request){
-        String authorization = request.getHeader("authorization");
-        log.error("authorization is {}",authorization);
-        log.error("key is {},value is {}",key,value);
-        return new StringBuilder("department-").append(port).append("-").append(authorization).append(" key is ").append(key)
-                .append(" value is ").append(value).toString();
+    public String getDepartment(@RequestParam Long deptId){
+        log.error(port + "getDepartment............");
+        return port + "-" + deptService.getDeptById(deptId).getDeptName();
+    }
+
+    @PatchMapping
+    public void updateDept(@RequestBody DeptUpdateQo deptUpdateQo){
+        log.error(deptUpdateQo.toString());
+        deptService.updateDept(deptUpdateQo);
     }
 }
